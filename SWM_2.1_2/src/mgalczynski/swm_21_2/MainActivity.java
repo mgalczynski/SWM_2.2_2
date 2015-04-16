@@ -35,61 +35,54 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				final String item = (String) parent.getItemAtPosition(position);
-				view.animate().setDuration(2000).alpha(0)
-						.withEndAction(new Runnable() {
-							@Override
-							public void run() {
-								if (arguments[0].equals(item)) {
-									PackageManager manager = getApplicationContext()
-											.getPackageManager();
-									Intent i = manager
-											.getLaunchIntentForPackage("mgalczynski.swm_21_1");
-									if (i == null) {
-										Toast.makeText(getApplicationContext(),
-												R.string.anotherAppFail,
-												Toast.LENGTH_SHORT).show();
-									}
-									i.addCategory(Intent.CATEGORY_LAUNCHER);
-									getApplicationContext().startActivity(i);
-								} else if (arguments[1].equals(item)) {
-									Intent intent = new Intent(
-											Intent.ACTION_SEARCH);
-									intent.putExtra(SearchManager.QUERY,
-											"Android");
-									try{
-										startActivity(intent);
-										}catch(ActivityNotFoundException ex){
-											Toast.makeText(getApplicationContext(),
-													R.string.error,
-													Toast.LENGTH_SHORT).show();
-										}
-								} else if (arguments[2].equals(item)) {
-									Intent intent = new Intent(
-											Intent.ACTION_SEND);
-									intent.setType(HTTP.PLAIN_TEXT_TYPE);
-									intent.putExtra("sms_body", "Wiadomoœæ");
-									try{
-										startActivity(intent);
-										}catch(ActivityNotFoundException ex){
-											Toast.makeText(getApplicationContext(),
-													R.string.error,
-													Toast.LENGTH_SHORT).show();
-										}
-								} else if (arguments[3].equals(item)) {
-									Uri webpage = Uri.parse("http://www.pwr.edu.pl");
-									Intent intent = new Intent(
-											Intent.ACTION_VIEW, webpage);
-									try{
-										startActivity(intent);
-										}catch(ActivityNotFoundException ex){
-											Toast.makeText(getApplicationContext(),
-													R.string.error,
-													Toast.LENGTH_SHORT).show();
-										}
-								} 
-							}
-						});
-			}
+				if (arguments[0].equals(item)) {
+					PackageManager manager = getApplicationContext()
+							.getPackageManager();
+					try {
+						Intent i = manager
+								.getLaunchIntentForPackage("mgalczynski.swm_21_1");
+						if (i == null) {
+							Toast.makeText(getApplicationContext(),
+									R.string.anotherAppFail, Toast.LENGTH_SHORT)
+									.show();
+						}
+						i.addCategory(Intent.CATEGORY_LAUNCHER);
+						startActivityForResult(i, 0);
+					} catch (NullPointerException ex) {
+						Toast.makeText(getApplicationContext(),
+								R.string.anotherAppFail, Toast.LENGTH_SHORT)
+								.show();
+					}
+				} else if (arguments[1].equals(item)) {
+					Intent intent = new Intent(Intent.ACTION_SEARCH);
+					intent.putExtra(SearchManager.QUERY, "Android");
+					try {
+						startActivity(intent);
+					} catch (ActivityNotFoundException ex) {
+						Toast.makeText(getApplicationContext(), R.string.error,
+								Toast.LENGTH_SHORT).show();
+					}
+				} else if (arguments[2].equals(item)) {
+					Intent intent = new Intent(Intent.ACTION_SEND);
+					intent.setType(HTTP.PLAIN_TEXT_TYPE);
+					intent.putExtra("sms_body", "Wiadomoœæ");
+					try {
+						startActivity(intent);
+					} catch (ActivityNotFoundException ex) {
+						Toast.makeText(getApplicationContext(), R.string.error,
+								Toast.LENGTH_SHORT).show();
+					}
+				} else if (arguments[3].equals(item)) {
+					Uri webpage = Uri.parse("http://www.pwr.edu.pl");
+					Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+					try {
+						startActivity(intent);
+					} catch (ActivityNotFoundException ex) {
+						Toast.makeText(getApplicationContext(), R.string.error,
+								Toast.LENGTH_SHORT).show();
+					}
+				}
+			};
 		});
 	}
 
@@ -103,18 +96,17 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Toast.makeText(getApplicationContext(),
-				R.string.resume,
+		Toast.makeText(getApplicationContext(), R.string.resume,
 				Toast.LENGTH_SHORT).show();
 	};
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Toast.makeText(getApplicationContext(),
-				R.string.pause,
+		Toast.makeText(getApplicationContext(), R.string.pause,
 				Toast.LENGTH_SHORT).show();
 	};
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
