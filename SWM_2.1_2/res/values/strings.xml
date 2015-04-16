@@ -4,5 +4,15 @@
     <string name="app_name">SWM_2.1_2</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="author_name">Mirosław Gałczyński</string>
+    <string name="application_info">Program na SWM laboratorium 3, program nr 1</string>
+    <string-array name="mainMenu">
+        <item>Uruchom inną aplikację</item>
+        <item>Drugi</item>
+<!--         <item>Trzeci</item> -->
+<!--         <item>Czwarty</item> -->
+    </string-array>
+    
+    <string name="anotherAppFail">Nie udało się uruchomić innej aplikacji</string>
 
 </resources>
